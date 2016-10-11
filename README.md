@@ -7,7 +7,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![SensioLabs Insight][ico-sensiolabs]][link-sensiolabs]
 
-Middleware to block referrar spam using [piwik/referrer-spam-blacklist](https://github.com/piwik/referrer-spam-blacklist). It returns a 403 response if the url host in the `Referer` header is in the blacklist.
+Middleware to block referrer spammers using [piwik/referrer-spam-blacklist](https://github.com/piwik/referrer-spam-blacklist). It returns a 403 response if the url host in the `Referer` header is in the blacklist.
 
 ## Requirements
 
@@ -50,10 +50,10 @@ The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 [ico-travis]: https://img.shields.io/travis/middlewares/referrer-spam/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/referrer-spam.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/middlewares/referrer-spam.svg?style=flat-square
-[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/36786f5a-2a15-4399-8817-8f24fcd8c0b4.svg?style=flat-square
+[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/20172f03-763a-4367-9168-4a7f88dbb5a1.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/middlewares/referrer-spam
 [link-travis]: https://travis-ci.org/middlewares/referrer-spam
 [link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/referrer-spam
 [link-downloads]: https://packagist.org/packages/middlewares/referrer-spam
-[link-sensiolabs]: https://insight.sensiolabs.com/projects/36786f5a-2a15-4399-8817-8f24fcd8c0b4
+[link-sensiolabs]: https://insight.sensiolabs.com/projects/20172f03-763a-4367-9168-4a7f88dbb5a1

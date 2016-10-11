@@ -1,7 +1,7 @@
 {
     "name": "middlewares/referrer-spam",
     "type": "library",
-    "description": "Middleware to block referrar spam",
+    "description": "Middleware to block referrer spammers",
     "license": "MIT",
     "keywords": [
         "psr-7",
