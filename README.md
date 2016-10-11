@@ -1,0 +1,59 @@
+# middlewares/referrer-spam
+
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Quality Score][ico-scrutinizer]][link-scrutinizer]
+[![Total Downloads][ico-downloads]][link-downloads]
+[![SensioLabs Insight][ico-sensiolabs]][link-sensiolabs]
+
+Middleware to block referrar spam using [piwik/referrer-spam-blacklist](https://github.com/piwik/referrer-spam-blacklist). It returns a 403 response if the url host in the `Referer` header is in the blacklist.
+
+## Requirements
+
+* PHP >= 5.6
+* A [PSR-7](https://packagist.org/providers/psr/http-message-implementation) http mesage implementation ([Diactoros](https://github.com/zendframework/zend-diactoros), [Guzzle](https://github.com/guzzle/psr7), [Slim](https://github.com/slimphp/Slim), etc...)
+* A [PSR-15](https://github.com/http-interop/http-middleware) middleware dispatcher ([Middleman](https://github.com/mindplay-dk/middleman), etc...)
+
+## Installation
+
+This package is installable and autoloadable via Composer as [middlewares/referrer-spam](https://packagist.org/packages/middlewares/referrer-spam).
+
+```sh
+composer require middlewares/referrer-spam
+```
+
+## Example
+
+```php
+$dispatcher = new Dispatcher([
+	new Middlewares\ReferrerSpam()
+]);
+
+$response = $dispatcher->dispatch(new Request());
+```
+
+## Options
+
+#### `__construct(array $blackList = null)`
+
+Allow to configure a custom spam list if you don't want to use the piwik's one.
+
+---
+
+Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes and [CONTRIBUTING](CONTRIBUTING.md) for contributing details.
+
+The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/middlewares/referrer-spam.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/middlewares/referrer-spam/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/referrer-spam.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/middlewares/referrer-spam.svg?style=flat-square
+[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/36786f5a-2a15-4399-8817-8f24fcd8c0b4.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/middlewares/referrer-spam
+[link-travis]: https://travis-ci.org/middlewares/referrer-spam
+[link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/referrer-spam
+[link-downloads]: https://packagist.org/packages/middlewares/referrer-spam
+[link-sensiolabs]: https://insight.sensiolabs.com/projects/36786f5a-2a15-4399-8817-8f24fcd8c0b4
