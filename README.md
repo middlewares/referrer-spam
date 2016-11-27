@@ -1,7 +1,7 @@
 # middlewares/referrer-spam
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
+[![Software License][ico-license]](LICENSE)
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-scrutinizer]][link-scrutinizer]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -30,7 +30,7 @@ $dispatcher = new Dispatcher([
 	new Middlewares\ReferrerSpam()
 ]);
 
-$response = $dispatcher->dispatch(new Request());
+$response = $dispatcher->dispatch(new ServerRequest());
 ```
 
 ## Options

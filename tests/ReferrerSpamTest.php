@@ -3,9 +3,10 @@
 namespace Middlewares\Tests;
 
 use Middlewares\ReferrerSpam;
-use Zend\Diactoros\Request;
+use Middlewares\Utils\Dispatcher;
+use Middlewares\Utils\CallableMiddleware;
+use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response;
-use mindplay\middleman\Dispatcher;
 
 class ReferrerSpamTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,13 +24,13 @@ class ReferrerSpamTest extends \PHPUnit_Framework_TestCase
      */
     public function testReferrerSpam($allowed, $refererHeader)
     {
-        $request = (new Request())->withHeader('Referer', $refererHeader);
+        $request = (new ServerRequest())->withHeader('Referer', $refererHeader);
 
         $response = (new Dispatcher([
             new ReferrerSpam(),
-            function () {
+            new CallableMiddleware(function () {
                 return new Response();
-            },
+            }),
         ]))->dispatch($request);
 
         $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
