@@ -24,9 +24,9 @@ class ReferrerSpamTest extends \PHPUnit_Framework_TestCase
     {
         $request = Factory::createServerRequest()->withHeader('Referer', $refererHeader);
 
-        $response = (new Dispatcher([
+        $response = Dispatcher::run([
             new ReferrerSpam(),
-        ]))->dispatch($request);
+        ], $request);
 
         $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
 
