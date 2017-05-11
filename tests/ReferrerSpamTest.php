@@ -28,8 +28,6 @@ class ReferrerSpamTest extends \PHPUnit_Framework_TestCase
             new ReferrerSpam(),
         ], $request);
 
-        $this->assertInstanceOf('Psr\\Http\\Message\\ResponseInterface', $response);
-
         if ($allowed) {
             $this->assertEquals(200, $response->getStatusCode());
         } else {

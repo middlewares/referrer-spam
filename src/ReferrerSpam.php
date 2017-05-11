@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use RuntimeException;
+use ComposerLocator;
 
 class ReferrerSpam implements MiddlewareInterface
 {
@@ -62,17 +63,12 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private static function getBlackList()
     {
-        $spammers = realpath(__DIR__.'/../../../../vendor/piwik/referrer-spam-blacklist/spammers.txt');
+        $path = ComposerLocator::getPath('piwik/referrer-spam-blacklist').'/spammers.txt';
 
-        //dev mode
-        if ($spammers === false) {
-            $spammers = realpath(__DIR__.'/../vendor/piwik/referrer-spam-blacklist/spammers.txt');
-        }
-
-        if ($spammers === false) {
+        if (!is_file($path)) {
             throw new RuntimeException('Unable to locate the piwik referrer spam blacklist file');
         }
 
-        return file($spammers, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        return file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
 }
