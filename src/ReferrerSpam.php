@@ -2,12 +2,12 @@
 
 namespace Middlewares;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use RuntimeException;
 use ComposerLocator;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 
 class ReferrerSpam implements MiddlewareInterface
 {
