@@ -2,11 +2,12 @@
 
 namespace Middlewares\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Middlewares\ReferrerSpam;
 use Middlewares\Utils\Dispatcher;
 use Middlewares\Utils\Factory;
 
-class ReferrerSpamTest extends \PHPUnit_Framework_TestCase
+class ReferrerSpamTest extends TestCase
 {
     public function referrerSpamProvider()
     {
