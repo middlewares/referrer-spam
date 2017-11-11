@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Middlewares;
 
@@ -23,13 +24,8 @@ class ReferrerSpam implements MiddlewareInterface
 
     /**
      * Process a request and return a response.
-     *
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
-     *
-     * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if ($request->hasHeader('Referer')) {
             if ($this->blackList === null) {
@@ -58,10 +54,8 @@ class ReferrerSpam implements MiddlewareInterface
 
     /**
      * Returns the piwik's referrer spam blacklist.
-     *
-     * @return array
      */
-    private static function getBlackList()
+    private static function getBlackList(): array
     {
         $path = ComposerLocator::getPath('piwik/referrer-spam-blacklist').'/spammers.txt';
 
