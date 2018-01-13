@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Middlewares\Tests;
 
@@ -20,16 +21,15 @@ class ReferrerSpamTest extends TestCase
 
     /**
      * @dataProvider referrerSpamProvider
-     * @param mixed $allowed
-     * @param mixed $refererHeader
      */
-    public function testReferrerSpam($allowed, $refererHeader)
+    public function testReferrerSpam(bool $allowed, string $refererHeader)
     {
-        $request = Factory::createServerRequest()->withHeader('Referer', $refererHeader);
-
-        $response = Dispatcher::run([
-            new ReferrerSpam(),
-        ], $request);
+        $response = Dispatcher::run(
+            [
+                new ReferrerSpam(),
+            ],
+            Factory::createServerRequest()->withHeader('Referer', $refererHeader)
+        );
 
         if ($allowed) {
             $this->assertEquals(200, $response->getStatusCode());

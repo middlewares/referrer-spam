@@ -60,7 +60,9 @@ class ReferrerSpam implements MiddlewareInterface
         $path = ComposerLocator::getPath('piwik/referrer-spam-blacklist').'/spammers.txt';
 
         if (!is_file($path)) {
+            // @codeCoverageIgnoreStart
             throw new RuntimeException('Unable to locate the piwik referrer spam blacklist file');
+            // @codeCoverageIgnoreEnd
         }
 
         return file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
