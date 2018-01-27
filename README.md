@@ -7,7 +7,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![SensioLabs Insight][ico-sensiolabs]][link-sensiolabs]
 
-Middleware to block referrer spammers using [piwik/referrer-spam-blacklist](https://github.com/piwik/referrer-spam-blacklist). It returns a 403 response if the url host in the `Referer` header is in the blacklist.
+Middleware to block referrer spammers using [piwik/referrer-spam-blacklist](https://github.com/matomo-org/referrer-spam-blacklist). It returns a 403 response if the url host in the `Referer` header is in the blacklist.
 
 ## Requirements
 
@@ -27,7 +27,7 @@ composer require middlewares/referrer-spam
 
 ```php
 $dispatcher = new Dispatcher([
-	new Middlewares\ReferrerSpam()
+    new Middlewares\ReferrerSpam()
 ]);
 
 $response = $dispatcher->dispatch(new ServerRequest());
