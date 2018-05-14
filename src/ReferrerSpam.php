@@ -43,6 +43,8 @@ class ReferrerSpam implements MiddlewareInterface
 
             $host = urldecode(parse_url($referer, PHP_URL_HOST));
             $host = preg_replace('/^(www\.)/i', '', $host);
+            // encode IDN to punycode (russian url for example)
+            $host = (new \TrueBV\Punycode())->encode($host);
 
             if (in_array($host, $this->blackList, true)) {
                 return Utils\Factory::createResponse(403);
@@ -57,11 +59,11 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private static function getBlackList(): array
     {
-        $path = ComposerLocator::getPath('piwik/referrer-spam-blacklist').'/spammers.txt';
+        $path = ComposerLocator::getPath('matomo/referrer-spam-blacklist').'/spammers.txt';
 
         if (!is_file($path)) {
             // @codeCoverageIgnoreStart
-            throw new RuntimeException('Unable to locate the piwik referrer spam blacklist file');
+            throw new RuntimeException('Unable to locate the matomo referrer spam blacklist file');
             // @codeCoverageIgnoreEnd
         }
 
