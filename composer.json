@@ -22,8 +22,7 @@
         "middlewares/utils": "^1.0",
         "matomo/referrer-spam-blacklist": "^1.1",
         "mindplay/composer-locator": "^2.1",
-        "psr/http-server-middleware": "^1.0",
-        "true/punycode": "^2.1"
+        "psr/http-server-middleware": "^1.0"
     },
     "suggest": {
         "true/punycode": "~2.0",
