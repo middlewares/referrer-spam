@@ -5,12 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.0] - 2018-30-06
+## [1.1.0] - 2018-06-30
 
 ### Fixed
 
-- Update piwik list to matomo list #2
-- Unicode encoded domain names are converted to IDNA ASCII using `ext-intl` or `true/punicode`.
+- Update piwik list to matomo list [#1], [#2]
+- Unicode encoded domain names are converted to IDNA ASCII using `ext-intl` or `true/punicode`. [#1], [#2]
 
 ## [1.0.0] - 2018-01-27
 
@@ -65,6 +65,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 First version
 
+[#1]: https://github.com/middlewares/referrer-spam/issues/1
+[#2]: https://github.com/middlewares/referrer-spam/issues/2
+
+[1.1.0]: https://github.com/middlewares/referrer-spam/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/middlewares/referrer-spam/compare/v0.5.0...v1.0.0
 [0.5.0]: https://github.com/middlewares/referrer-spam/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/middlewares/referrer-spam/compare/v0.3.0...v0.4.0
