@@ -17,11 +17,21 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private $blackList;
 
+    /**
+     * @throws RuntimeException If no idn to ascii library is detected
+     */
+    private static function checkIDNtoASCII()
+    {
+        if (!function_exists('idn_to_ascii') && !method_exists('\TrueBV\Punycode', 'encode')) {
+            throw new RuntimeException(
+                "To handle Unicode encoded domain name, Intl PHP extension or the lib 'true/punycode' is required"
+            );
+        }
+    }
+
     public function __construct(array $blackList = null)
     {
-        if (! function_exists('idn_to_ascii') && ! method_exists('\TrueBV\Punycode', 'encode')) {
-            throw new RuntimeException("To handle Unicode encoded domain name, Intl PHP extension or the lib 'true/punycode' is required");
-        }
+        self::checkIDNtoASCII();
         $this->blackList = $blackList;
     }
 
@@ -46,12 +56,7 @@ class ReferrerSpam implements MiddlewareInterface
 
             $host = urldecode(parse_url($referer, PHP_URL_HOST));
             $host = preg_replace('/^(www\.)/i', '', $host);
-            // encode IDN to punycode (russian url for example)
-            if (function_exists('idn_to_ascii')) {
-                $host = idn_to_ascii($host);
-            } else {
-                $host = (new \TrueBV\Punycode())->encode($host);
-            }
+            $host = $this->encodeIDN($host);
 
             if (in_array($host, $this->blackList, true)) {
                 return Utils\Factory::createResponse(403);
@@ -59,6 +64,18 @@ class ReferrerSpam implements MiddlewareInterface
         }
 
         return $handler->handle($request);
+    }
+
+    /**
+     * Encode IDN to ASCII form (russian url for example)
+     */
+    private function encodeIDN(string $domain): string
+    {
+        if (function_exists('idn_to_ascii')) {
+            return idn_to_ascii($domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
+        }
+
+        return (new \TrueBV\Punycode())->encode($domain);
     }
 
     /**

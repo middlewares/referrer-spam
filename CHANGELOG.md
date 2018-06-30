@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2018-30-06
+
+### Fixed
+
+- Update piwik list to matomo list #2
+- Unicode encoded domain names are converted to IDNA ASCII using `ext-intl` or `true/punicode`.
+
 ## [1.0.0] - 2018-01-27
 
 ### Added
