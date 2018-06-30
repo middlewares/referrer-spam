@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace Middlewares\Tests;
 
-use Eloquent\Phony\Phpunit\Phony;
 use Middlewares\ReferrerSpam;
 use Middlewares\Utils\Dispatcher;
 use Middlewares\Utils\Factory;
@@ -11,19 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class ReferrerSpamTest extends TestCase
 {
-    public function tearDown()
-    {
-        // http://eloquent-software.com/phony/latest/#restoring-global-functions-after-stubbing
-        Phony::restoreGlobalFunctions();
-    }
-
-    public function testConstructorException()
-    {
-        //$stub = Phony::stubGlobal('function_exists', 'Middlewares')->returns(false);
-        //$stub = Phony::stubGlobal('method_exists', 'Middlewares')->returns(false);
-        $middleware = new ReferrerSpam();
-    }
-
     public function referrerSpamProvider()
     {
         return [
