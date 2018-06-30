@@ -19,6 +19,9 @@ class ReferrerSpam implements MiddlewareInterface
 
     public function __construct(array $blackList = null)
     {
+        if (! function_exists('idn_to_ascii') && ! method_exists('\TrueBV\Punycode', 'encode')) {
+            throw new RuntimeException("To handle Unicode encoded domain name, Intl PHP extension or the lib 'true/punycode' is required");
+        }
         $this->blackList = $blackList;
     }
 
@@ -43,6 +46,12 @@ class ReferrerSpam implements MiddlewareInterface
 
             $host = urldecode(parse_url($referer, PHP_URL_HOST));
             $host = preg_replace('/^(www\.)/i', '', $host);
+            // encode IDN to punycode (russian url for example)
+            if (function_exists('idn_to_ascii')) {
+                $host = idn_to_ascii($host);
+            } else {
+                $host = (new \TrueBV\Punycode())->encode($host);
+            }
 
             if (in_array($host, $this->blackList, true)) {
                 return Utils\Factory::createResponse(403);
@@ -57,11 +66,11 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private static function getBlackList(): array
     {
-        $path = ComposerLocator::getPath('piwik/referrer-spam-blacklist').'/spammers.txt';
+        $path = ComposerLocator::getPath('matomo/referrer-spam-blacklist').'/spammers.txt';
 
         if (!is_file($path)) {
             // @codeCoverageIgnoreStart
-            throw new RuntimeException('Unable to locate the piwik referrer spam blacklist file');
+            throw new RuntimeException('Unable to locate the matomo referrer spam blacklist file');
             // @codeCoverageIgnoreEnd
         }
 
