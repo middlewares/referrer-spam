@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Middlewares;
 
 use ComposerLocator;
+use Middlewares\Utils\Traits\HasResponseFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -12,6 +13,8 @@ use RuntimeException;
 
 class ReferrerSpam implements MiddlewareInterface
 {
+    use HasResponseFactory;
+
     /**
      * @var array|null
      */
@@ -59,7 +62,7 @@ class ReferrerSpam implements MiddlewareInterface
             $host = $this->encodeIDN($host);
 
             if (in_array($host, $this->blackList, true)) {
-                return Utils\Factory::createResponse(403);
+                return $this->createResponse(403);
             }
         }
 
