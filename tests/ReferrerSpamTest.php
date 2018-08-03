@@ -28,7 +28,7 @@ class ReferrerSpamTest extends TestCase
             [
                 new ReferrerSpam(),
             ],
-            Factory::createServerRequest()->withHeader('Referer', $refererHeader)
+            Factory::createServerRequest('GET', '/')->withHeader('Referer', $refererHeader)
         );
 
         if ($allowed) {
