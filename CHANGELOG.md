@@ -75,6 +75,7 @@ First version
 [#1]: https://github.com/middlewares/referrer-spam/issues/1
 [#2]: https://github.com/middlewares/referrer-spam/issues/2
 
+[1.2.0]: https://github.com/middlewares/referrer-spam/compare/v1.1.0...HEAD
 [1.1.0]: https://github.com/middlewares/referrer-spam/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/middlewares/referrer-spam/compare/v0.5.0...v1.0.0
 [0.5.0]: https://github.com/middlewares/referrer-spam/compare/v0.4.0...v0.5.0
