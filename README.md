@@ -40,6 +40,9 @@ $response = $dispatcher->dispatch(new ServerRequest());
 
 Allow to configure a custom spam list if you don't want to use the piwik's one.
 
+#### `responseFactory(Psr\Http\Message\ResponseFactoryInterface $responseFactory)`
+
+A PSR-17 factory to create `403` responses.
 ---
 
 Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes and [CONTRIBUTING](CONTRIBUTING.md) for contributing details.
