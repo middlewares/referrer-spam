@@ -75,7 +75,7 @@ class ReferrerSpam implements MiddlewareInterface
     private function encodeIDN(string $domain): string
     {
         if (function_exists('idn_to_ascii')) {
-            return idn_to_ascii($domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
+            return idn_to_ascii($domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46) ?: $domain;
         }
 
         return (new \TrueBV\Punycode())->encode($domain);
@@ -94,6 +94,12 @@ class ReferrerSpam implements MiddlewareInterface
             // @codeCoverageIgnoreEnd
         }
 
-        return file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $list = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        if ($list === false) {
+            throw new RuntimeException(sprintf('Fail reading the file %s', $path));
+        }
+
+        return $list;
     }
 }
