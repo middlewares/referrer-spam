@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Middlewares;
 
 use ComposerLocator;
-use Middlewares\Utils\Traits\HasResponseFactory;
 use Middlewares\Utils\Factory;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -15,12 +14,15 @@ use RuntimeException;
 
 class ReferrerSpam implements MiddlewareInterface
 {
-    use HasResponseFactory;
-
     /**
      * @var array|null
      */
     private $blackList;
+
+    /**
+     * @var ResponseFactoryInterface
+     */
+    private $responseFactory;
 
     /**
      * @throws RuntimeException If no idn to ascii library is detected
@@ -65,7 +67,7 @@ class ReferrerSpam implements MiddlewareInterface
             $host = $this->encodeIDN($host);
 
             if (in_array($host, $this->blackList, true)) {
-                return $this->createResponse(403);
+                return $this->responseFactory->createResponse(403);
             }
         }
 
