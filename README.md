@@ -5,13 +5,12 @@
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-scrutinizer]][link-scrutinizer]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![SensioLabs Insight][ico-sensiolabs]][link-sensiolabs]
 
-Middleware to block referrer spammers using [piwik/referrer-spam-blacklist](https://github.com/matomo-org/referrer-spam-blacklist). It returns a 403 response if the url host in the `Referer` header is in the blacklist.
+Middleware to block referrer spammers using [matomo/referrer-spam-blacklist](https://github.com/matomo-org/referrer-spam-blacklist). It returns a `403` response if the url host in the `Referer` header is in the blacklist.
 
 ## Requirements
 
-* PHP >= 7.0
+* PHP >= 7.2
 * A [PSR-7 http library](https://github.com/middlewares/awesome-psr15-middlewares#psr-7-implementations)
 * A [PSR-15 middleware dispatcher](https://github.com/middlewares/awesome-psr15-middlewares#dispatcher)
 * `ext-intl` PHP extension or [true/punycode](https://github.com/true/php-punycode) as alternative
@@ -24,25 +23,33 @@ This package is installable and autoloadable via Composer as [middlewares/referr
 composer require middlewares/referrer-spam
 ```
 
-## Example
+## Usage
+
+By default, use `matomo/referrer-spam-blacklist` as a list of spammers
 
 ```php
-$dispatcher = new Dispatcher([
-    new Middlewares\ReferrerSpam()
-]);
-
-$response = $dispatcher->dispatch(new ServerRequest());
+$spam = new Middlewares\ReferrerSpam();
 ```
 
-## Options
+But you can configure a custom spam list if you don't want to use the default:
 
-#### `__construct(array $blackList = null)`
+```php
+$spammers = [
+    'http://www.0n-line.tv',
+    'http://холодныйобзвон.рф',
+];
 
-Allow to configure a custom spam list if you don't want to use the piwik's one.
+$spam = new Middlewares\ReferrerSpam($spammers);
+```
 
-#### `responseFactory(Psr\Http\Message\ResponseFactoryInterface $responseFactory)`
+Optionally, you can provide a `Psr\Http\Message\ResponseFactoryInterface` as the second argument to create the error responses (`403`). If it's not defined, [Middleware\Utils\Factory](https://github.com/middlewares/utils#factory) will be used to detect it automatically.
 
-A PSR-17 factory to create `403` responses.
+```php
+$responseFactory = new MyOwnResponseFactory();
+
+$spam = new Middlewares\ReferrerSpam($spammers, $responseFactory);
+```
+
 ---
 
 Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes and [CONTRIBUTING](CONTRIBUTING.md) for contributing details.
@@ -54,10 +61,8 @@ The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 [ico-travis]: https://img.shields.io/travis/middlewares/referrer-spam/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/referrer-spam.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/middlewares/referrer-spam.svg?style=flat-square
-[ico-sensiolabs]: https://img.shields.io/sensiolabs/i/20172f03-763a-4367-9168-4a7f88dbb5a1.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/middlewares/referrer-spam
 [link-travis]: https://travis-ci.org/middlewares/referrer-spam
 [link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/referrer-spam
 [link-downloads]: https://packagist.org/packages/middlewares/referrer-spam
-[link-sensiolabs]: https://insight.sensiolabs.com/projects/20172f03-763a-4367-9168-4a7f88dbb5a1
