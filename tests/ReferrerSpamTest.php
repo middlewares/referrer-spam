@@ -16,6 +16,7 @@ class ReferrerSpamTest extends TestCase
             [false, 'http://www.0n-line.tv'],
             [false, 'http://холодныйобзвон.рф'],
             [true, 'http://youtube.com'],
+            [true, 'invalid-url'],
         ];
     }
 
