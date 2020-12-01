@@ -2,8 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
-[![Quality Score][ico-scrutinizer]][link-scrutinizer]
+![Testing][ico-ga]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 Middleware to block referrer spammers using [matomo/referrer-spam-blacklist](https://github.com/matomo-org/referrer-spam-blacklist). It returns a `403` response if the url host in the `Referer` header is in the blacklist.
@@ -58,11 +57,9 @@ The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/middlewares/referrer-spam.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/middlewares/referrer-spam/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/g/middlewares/referrer-spam.svg?style=flat-square
+[ico-ga]: https://github.com/middlewares/referrer-spam/workflows/testing/badge.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/middlewares/referrer-spam.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/middlewares/referrer-spam
-[link-travis]: https://travis-ci.org/middlewares/referrer-spam
 [link-scrutinizer]: https://scrutinizer-ci.com/g/middlewares/referrer-spam
 [link-downloads]: https://packagist.org/packages/middlewares/referrer-spam
