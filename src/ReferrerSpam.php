@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace Middlewares;
 
-use ComposerLocator;
 use Middlewares\Utils\Factory;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
