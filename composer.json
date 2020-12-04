@@ -21,7 +21,6 @@
         "php": "^7.2 || ^8.0",
         "middlewares/utils": "^3.0",
         "matomo/referrer-spam-blacklist": "*",
-        "mindplay/composer-locator": "^2.1",
         "psr/http-server-middleware": "^1.0"
     },
     "suggest": {

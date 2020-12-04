@@ -95,9 +95,9 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private static function getBlackList(): array
     {
-        $path = ComposerLocator::getPath('matomo/referrer-spam-blacklist').'/spammers.txt';
+        $path = self::locateMatomoBlacklist();
 
-        if (!is_file($path)) {
+        if ($path === null) {
             // @codeCoverageIgnoreStart
             throw new RuntimeException('Unable to locate the matomo referrer spam blacklist file');
             // @codeCoverageIgnoreEnd
@@ -110,5 +110,26 @@ class ReferrerSpam implements MiddlewareInterface
         }
 
         return $list;
+    }
+
+    private static function locateMatomoBlacklist(): ?string
+    {
+        $file = 'matomo/referrer-spam-blacklist/spammers.txt';
+
+        //Development
+        $path = __DIR__."/../vendor/{$file}";
+
+        if (is_file($path)) {
+            return $path;
+        }
+
+        //Production
+        $path = __DIR__."/../../../{$file}";
+
+        if (is_file($path)) {
+            return $path;
+        }
+
+        return null;
     }
 }
