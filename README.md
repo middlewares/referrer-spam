@@ -12,7 +12,8 @@ Middleware to block referrer spammers using [matomo/referrer-spam-blacklist](htt
 * PHP >= 7.2
 * A [PSR-7 http library](https://github.com/middlewares/awesome-psr15-middlewares#psr-7-implementations)
 * A [PSR-15 middleware dispatcher](https://github.com/middlewares/awesome-psr15-middlewares#dispatcher)
-* `ext-intl` PHP extension or [true/punycode](https://github.com/true/php-punycode) as alternative
+
+`ext-intl` PHP extension is recommended otherwise [symfony/polyfill-intl-idn](https://github.com/symfony/polyfill-intl-idn) is used. 
 
 ## Installation
 
