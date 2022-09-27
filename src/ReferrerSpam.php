@@ -28,9 +28,9 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private static function checkIDNtoASCII()
     {
-        if (!function_exists('idn_to_ascii') && !method_exists('\TrueBV\Punycode', 'encode')) {
+        if (!function_exists('idn_to_ascii')) {
             throw new RuntimeException(
-                "To handle Unicode encoded domain name, Intl PHP extension or the lib 'true/punycode' is required"
+                "To handle Unicode encoded domain name, Intl PHP extension"
             );
         }
     }
@@ -67,7 +67,7 @@ class ReferrerSpam implements MiddlewareInterface
                 $host = urldecode($host);
                 $host = preg_replace('/^(www\.)/i', '', $host);
                 $host = $this->encodeIDN($host);
-    
+
                 if (in_array($host, $this->blackList, true)) {
                     return $this->responseFactory->createResponse(403);
                 }
@@ -82,11 +82,7 @@ class ReferrerSpam implements MiddlewareInterface
      */
     private function encodeIDN(string $domain): string
     {
-        if (function_exists('idn_to_ascii')) {
-            return idn_to_ascii($domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46) ?: $domain;
-        }
-
-        return (new \TrueBV\Punycode())->encode($domain);
+        return idn_to_ascii($domain, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46) ?: $domain;
     }
 
     /**
