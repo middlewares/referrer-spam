@@ -1,9 +1,12 @@
 # Change Log
-
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [2.0.4] - 2025-03-08
+### Fixed
+- Updated dependencies and allow middlewares/utils:^4.0 [#7], [#8].
 
 ## [2.0.3] - 2022-09-27
 ### Fixed
@@ -82,7 +85,10 @@ First version
 [#3]: https://github.com/middlewares/referrer-spam/issues/3
 [#4]: https://github.com/middlewares/referrer-spam/issues/4
 [#6]: https://github.com/middlewares/referrer-spam/issues/6
+[#7]: https://github.com/middlewares/referrer-spam/issues/7
+[#8]: https://github.com/middlewares/referrer-spam/issues/8
 
+[2.0.4]: https://github.com/middlewares/referrer-spam/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/middlewares/referrer-spam/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/middlewares/referrer-spam/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/middlewares/referrer-spam/compare/v2.0.0...v2.0.1
