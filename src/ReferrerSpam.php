@@ -13,29 +13,26 @@ use RuntimeException;
 
 class ReferrerSpam implements MiddlewareInterface
 {
-    /**
-     * @var array|null
-     */
     private $blackList;
 
-    /**
-     * @var ResponseFactoryInterface
-     */
     private $responseFactory;
 
     /**
      * @throws RuntimeException If no idn to ascii library is detected
      */
-    private static function checkIDNtoASCII()
+    private static function checkIDNtoASCII(): void
     {
         if (!function_exists('idn_to_ascii')) {
             throw new RuntimeException(
-                "To handle Unicode encoded domain name, Intl PHP extension"
+                'To handle Unicode encoded domain name, Intl PHP extension'
             );
         }
     }
 
-    public function __construct(array $blackList = null, ResponseFactoryInterface $responseFactory = null)
+    /**
+     * @param string[]|null $blackList
+     */
+    public function __construct(?array $blackList = null, ?ResponseFactoryInterface $responseFactory = null)
     {
         self::checkIDNtoASCII();
         $this->blackList = $blackList;
@@ -61,12 +58,12 @@ class ReferrerSpam implements MiddlewareInterface
                 $request->getHeaderLine('Referer')
             );
 
-            $host = parse_url($referer, PHP_URL_HOST);
+            $host = parse_url((string) $referer, PHP_URL_HOST);
 
             if ($host) {
                 $host = urldecode($host);
                 $host = preg_replace('/^(www\.)/i', '', $host);
-                $host = $this->encodeIDN($host);
+                $host = $this->encodeIDN((string) $host);
 
                 if (in_array($host, $this->blackList, true)) {
                     return $this->responseFactory->createResponse(403);
@@ -87,6 +84,7 @@ class ReferrerSpam implements MiddlewareInterface
 
     /**
      * Returns the piwik's referrer spam blacklist.
+     * @return string[]
      */
     private static function getBlackList(): array
     {
