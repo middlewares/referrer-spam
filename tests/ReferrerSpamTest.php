@@ -41,4 +41,16 @@ class ReferrerSpamTest extends TestCase
             $this->assertEquals(403, $response->getStatusCode());
         }
     }
+
+    public function testWithoutHeader(): void
+    {
+        $response = Dispatcher::run(
+            [
+                new ReferrerSpam(),
+            ],
+            Factory::createServerRequest('GET', '/')
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }

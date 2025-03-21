@@ -58,12 +58,12 @@ class ReferrerSpam implements MiddlewareInterface
                 $request->getHeaderLine('Referer')
             );
 
-            $host = parse_url($referer, PHP_URL_HOST);
+            $host = parse_url((string) $referer, PHP_URL_HOST);
 
             if ($host) {
                 $host = urldecode($host);
                 $host = preg_replace('/^(www\.)/i', '', $host);
-                $host = $this->encodeIDN($host);
+                $host = $this->encodeIDN((string) $host);
 
                 if (in_array($host, $this->blackList, true)) {
                     return $this->responseFactory->createResponse(403);
