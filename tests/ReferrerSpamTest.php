@@ -10,7 +10,10 @@ use PHPUnit\Framework\TestCase;
 
 class ReferrerSpamTest extends TestCase
 {
-    public function referrerSpamProvider()
+    /**
+     * @return array<array<bool|string>>
+     */
+    public function referrerSpamProvider(): array
     {
         return [
             [false, 'http://www.0n-line.tv'],
@@ -23,7 +26,7 @@ class ReferrerSpamTest extends TestCase
     /**
      * @dataProvider referrerSpamProvider
      */
-    public function testReferrerSpam(bool $allowed, string $refererHeader)
+    public function testReferrerSpam(bool $allowed, string $refererHeader): void
     {
         $response = Dispatcher::run(
             [
@@ -37,5 +40,17 @@ class ReferrerSpamTest extends TestCase
         } else {
             $this->assertEquals(403, $response->getStatusCode());
         }
+    }
+
+    public function testWithoutHeader(): void
+    {
+        $response = Dispatcher::run(
+            [
+                new ReferrerSpam(),
+            ],
+            Factory::createServerRequest('GET', '/')
+        );
+
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }
